@@ -390,7 +390,7 @@ disallow_untyped_defs = true
 strict = true
 ```
 
-For the full specific of `struct` then [MyPy Strict Options](https://mypy.readthedocs.io/en/stable/existing_code.html#introduce-stricter-options).
+For the full specific of `strict` then [MyPy Strict Options](https://mypy.readthedocs.io/en/stable/existing_code.html#introduce-stricter-options).
 
 This pretty much disallows the use of `Any` amongst some other corner cases, but disallowing `Any` is a big one on the way to becoming a fully typed codebase.
 
