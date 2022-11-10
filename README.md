@@ -11,12 +11,12 @@ Mini blog to myself about the technical steps to get a python development enviro
   - [List Versions you **CAN** install](#list-versions-you-can-install)
   - [List Versions that **ARE** installed](#list-versions-that-are-installed)
   - [Check and Activate a Version](#check-and-activate-a-version)
-  - [Troubleshooting](#troubleshooting)
+  - [PyEnv Troubleshooting](#pyenv-troubleshooting)
   - [Resources](#resources)
 - [Poetry](#poetry)
   - [Install / Upgrade](#install--upgrade)
   - [Configuration](#configuration)
-  - [Troubleshooting](#troubleshooting-1)
+  - [Poetry Troubleshooting](#poetry-troubleshooting)
 - [Invoke Common Tasks](#invoke-common-tasks)
   - [Install / Upgrade](#install--upgrade-1)
   - [Configuration](#configuration-1)
@@ -97,7 +97,7 @@ pyenv version
 3.10.3 (set by /Users/joshpeak/.pyenv/version)
 ```
 
-## Troubleshooting
+## PyEnv Troubleshooting
 
 1. Always use `python3` and not `python`. This could resolve to a python2 installation.
 1. Use `which -a python3` to figure out ALL `python3` binaries that could resolve from `PATH` environment variables and in which order.
@@ -150,9 +150,9 @@ You definitely want to create virtual environments only in the same folder as yo
 poetry config virtualenvs.in-project true --local
 ```
 
-## Troubleshooting
+## Poetry Troubleshooting
 
-99% of problems are resolved by resetting a borked virtual environment.
+1. 99% of problems are resolved by resetting a borked virtual environment.
 
 ```sh
 rm -rf .venv && rm poetry.lock
@@ -163,6 +163,22 @@ Then:
 ```sh
 poetry lock && poetry install
 ```
+
+2. When `deactivate`ing a poetry shell sometimes you need to `unset POETRY_ACTIVE` to clean the environment variables.
+
+3. Issues with `poetry` across multiple version of Python, `poetry` is installed _**per Python version**_. 
+   
+   Use the following when in doubt:
+   ```sh
+   python3 -m install -U poetry pip
+   python3 -m poetry shell
+   ```
+   1. **The problem**: When I run `poetry` on the commandline it resolves based on my `PATH`
+   2. So `python3 --version` could show `3.9`, but `poetry` is installed in my `3.8`
+   3. `poetry` will create a virtual environment based on the `python3` interpreter that it is being run in.
+   4. `python3 -m poetry` uses the exact version of `poetry` that is relative to the same `python3` you are expecting because you are using _module mode_ (`-m`).
+   5. This is part of the reason you upgrade `pip` using `python3 -m pip install -U pip` to make sure you are updating the same `pip` as your target `python3` interpreter. 
+   6. This is why I only activate `pyenv` on demand to have least magic on my `PATH` at any given time.
 
 ---
 # Invoke Common Tasks
