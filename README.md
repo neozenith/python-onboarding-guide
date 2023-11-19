@@ -8,6 +8,7 @@ Mini blog to myself about the technical steps to get a python development enviro
 - [PyEnv](#pyenv)
   - [Install / Update](#install--update)
   - [Activate on demand](#activate-on-demand)
+    - [Avoiding magic 🔮](#avoiding-magic-)
   - [List Versions you **CAN** install](#list-versions-you-can-install)
   - [List Versions that **ARE** installed](#list-versions-that-are-installed)
   - [Check and Activate a Version](#check-and-activate-a-version)
@@ -48,10 +49,25 @@ brew install pyenv
 
 ## Activate on demand 
 
-This causes the least magic 🔮 and you have better control over what is activated and when.
+This causes the least magic 🔮* and you have better control over what is activated and when.
 ```sh
 eval "$(pyenv init --path)"
 ```
+
+### Avoiding magic 🔮
+
+
+
+[![The Python environmental protection agency wants to seal it in a cement chamber, with pictorial messages to future civilizations warning them about the danger of using sudo to install random Python packages.](assets/xkcd_1987_python_environment_2x.png)](https://xkcd.com/1987/)
+
+> __*magic 🔮__ --> refers to `pip install poetry` or `pip install awscli` could resolve to installing it into **ANY** of **MANY** different python versions that might exist on your `PATH` and this all depends on the order they resolve.
+>
+> So when trying to upgrade it can get problematic...
+>
+> For example you install `awscli` into `homebrew/python3.8` but then `homebrew upgrade python3` and that now resolves to `hombrew/python3.9`.
+> `awscli` is still resolving first on `PATH` but `pip install --upgrade awscli` is pointing to `homebrew/python3.9`.
+>
+> The main way to avoid this completely and over the top is to use the `python3 -m pip install --upgrade awscli` format of the command, but use the absolute path to the version of python you need like ``
 
 ## List Versions you **CAN** install
 
