@@ -8,12 +8,14 @@ Mini blog to myself about the technical steps to get a python development enviro
 - [PyEnv](#pyenv)
   - [Install / Update](#install--update)
   - [Activate on demand](#activate-on-demand)
-    - [Avoiding magic 🔮](#avoiding-magic-)
+    - [Avoiding magic](#avoiding-magic)
   - [List Versions you **CAN** install](#list-versions-you-can-install)
   - [List Versions that **ARE** installed](#list-versions-that-are-installed)
   - [Check and Activate a Version](#check-and-activate-a-version)
   - [PyEnv Troubleshooting](#pyenv-troubleshooting)
   - [Resources](#resources)
+- [Pip & pip-tools](#pip--pip-tools)
+  - [pip-tools quickstart](#pip-tools-quickstart)
 - [Poetry](#poetry)
   - [Install / Upgrade](#install--upgrade)
   - [Configuration](#configuration)
@@ -54,7 +56,7 @@ This causes the least magic 🔮* and you have better control over what is activ
 eval "$(pyenv init --path)"
 ```
 
-### Avoiding magic 🔮
+### Avoiding magic
 
 <details>
   <summary>Click here for a deeper dive into avoiding *magic 🔮 </summary>
@@ -151,6 +153,7 @@ pyenv version
 ## Resources
  - https://github.com/pyenv/pyenv
  - https://realpython.com/intro-to-pyenv/
+
 
 ---
 # Pip & pip-tools
