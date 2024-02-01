@@ -14,7 +14,7 @@ Mini blog to myself about the technical steps to get a python development enviro
   - [Check and Activate a Version](#check-and-activate-a-version)
   - [PyEnv Troubleshooting](#pyenv-troubleshooting)
   - [Resources](#resources)
-- [Pip & pip-tools](#pip--pip-tools)
+- [Pip \& pip-tools](#pip--pip-tools)
   - [pip-tools quickstart](#pip-tools-quickstart)
 - [Poetry](#poetry)
   - [Install / Upgrade](#install--upgrade)
@@ -33,6 +33,7 @@ Mini blog to myself about the technical steps to get a python development enviro
     - [😰 This does not work](#-this-does-not-work-1)
   - [Level 3 - Strict](#level-3---strict)
   - [Further Reading](#further-reading)
+- [Documentation - MKDocs](#documentation---mkdocs)
 
 <!--TOC-->
 
@@ -524,3 +525,7 @@ This pretty much disallows the use of `Any` amongst some other corner cases, but
 ## Further Reading
 
 Checkout the [MyPy Existing Code Guide](https://mypy.readthedocs.io/en/stable/existing_code.html) for more details.
+
+---
+# Documentation - MKDocs
+
