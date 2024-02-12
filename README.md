@@ -37,6 +37,12 @@ Mini blog to myself about the technical steps to get a python development enviro
 
 <!--TOC-->
 
+# WIP Josh's Magic Opinionated Setup
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/main/joshs_magic_setup.py | python3
+```
+
 # PyEnv
 
 ## Install / Update
@@ -689,3 +695,12 @@ with mkdocs_gen_files.open("reference/SUMMARY.md", "w") as nav_file:
 
 ![Architecture](diagrams/architecture.drawio)
 ```
+
+## TODO
+
+ - Organise this content to be much more automated
+
+ ## Resources
+  - https://www.mkdocs.org/getting-started/
+  - https://squidfunk.github.io/mkdocs-material/
+  - https://github.com/mkdocs/catalog
