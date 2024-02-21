@@ -173,11 +173,18 @@ I'm using `pip-tools` here until I determine the pip only route to achieve the s
 
 ## pip-tools quickstart
 
+Ultra quickstart for a bare minimum virtual environment and a `requirements.in`
+
 ```sh
 python3 -m venv .venv
-. ./.venv/bin/activate
+.venv/bin/python3 -m pip install -U pip pip-tools
+.venv/bin/python3 -m piptools compile --generate-hashes requirements.in --output-file requirements.txt
+.venv/bin/python3 -m pip install -r requirements.txt --require-hashes --no-deps --only-binary :all:
+```
 
-python3 -m pip install -U pip pip-tools
+If you want to separate your requirements into `requirements/app.in`, `requirements/test.in` then follow this:
+
+```
 mkdir -p requirements src/myproject
 touch src/myproject/__init__.py
 ```
