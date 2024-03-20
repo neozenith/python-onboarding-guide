@@ -711,3 +711,50 @@ with mkdocs_gen_files.open("reference/SUMMARY.md", "w") as nav_file:
   - https://www.mkdocs.org/getting-started/
   - https://squidfunk.github.io/mkdocs-material/
   - https://github.com/mkdocs/catalog
+
+# Testcontainers + PyTest
+
+## Pytest Fixtures Using TestContainers
+
+Make a test fixture available for the duration of the entire pytest `session` when you have the following in your `conftest.py`.
+
+### `tests/conftest.py`
+```python
+# Third Party
+import pytest
+from testcontainers.compose import DockerCompose
+
+@pytest.fixture(name="dockercompose", scope="session")
+def _docker_compose():
+    with DockerCompose(filepath="containers/docker/", compose_file_name="docker-compose.yml", pull=True, build=True) as compose:
+        compose.wait_for("http://localhost:8080/")
+        yield compose
+
+```
+
+And here is an example test using it:
+
+### `tests/test_example.py`
+```python
+# Third Party
+import pytest
+import aiohttp
+import base64
+
+HOST = "http://localhost:8080/"
+BASIC_AUTH = base64.b64encode("testuser:insecurepassword".encode()).decode()
+
+headers={"Authorization": f"Basic {BASIC_AUTH}"}
+
+
+@pytest.mark.asyncio
+@pytest.mark.docker
+async def test_example(dockercompose) -> None:
+    """Start docker compose fixture and run endpoint check."""
+    print(headers)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(HOST, headers=headers) as response:
+            data = await response.json()
+    
+    assert len(data) > 0
+```
