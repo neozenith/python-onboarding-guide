@@ -5,6 +5,7 @@ Mini blog to myself about the technical steps to get a python development enviro
 <!--TOC-->
 
 - [Python Onboarding Guide](#python-onboarding-guide)
+- [WIP Josh's Magic Opinionated Setup](#wip-joshs-magic-opinionated-setup)
 - [PyEnv](#pyenv)
   - [Install / Update](#install--update)
   - [Activate on demand](#activate-on-demand)
@@ -34,6 +35,13 @@ Mini blog to myself about the technical steps to get a python development enviro
   - [Level 3 - Strict](#level-3---strict)
   - [Further Reading](#further-reading)
 - [Documentation - MKDocs](#documentation---mkdocs)
+  - [TODO](#todo)
+  - [Resources](#resources-1)
+- [Testcontainers + PyTest](#testcontainers--pytest)
+  - [Pytest Fixtures Using TestContainers](#pytest-fixtures-using-testcontainers)
+    - [`tests/conftest.py`](#testsconftestpy)
+    - [`tests/test_example.py`](#teststest_examplepy)
+- [GPG Commit Signing](#gpg-commit-signing)
 
 <!--TOC-->
 
@@ -757,4 +765,37 @@ async def test_example(dockercompose) -> None:
             data = await response.json()
     
     assert len(data) > 0
+```
+
+# GPG Commit Signing
+
+
+[Telling Git about your signing key - GitHub Docs](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+
+```sh
+# Install required tools. Pin Entry is required to assist with unlocking password protected keys.
+brew install gpg pinentry-mac
+echo "pinentry-program $(which pinentry-mac)" >> ~/.gnupg/gpg-agent.conf
+killall gpg-agent
+# Generate Key using interactive prompt
+gpg --full-generate-key
+# Get the Key ID
+gpg --list-secret-keys --keyid-format=short
+# Make exportable key
+gpg --armor --export KEY_ID_HERE
+# Restart gpg service
+gpg config --kill --all 
+```
+
+
+VSCode `.vscode/settings.json`
+
+
+```json
+{
+    "git.enableCommitSigning": true,
+    "git-graph.repository.commits.showSignatureStatus": true,
+    "git-graph.repository.sign.tags": true,
+    "git-graph.repository.sign.commits": true
+}
 ```
