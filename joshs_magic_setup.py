@@ -7,48 +7,50 @@ It's ok, you can steal it. I won't tell anyone ;)
 
 import argparse
 import sys
+from urllib.request import Request, urlopen
+import ssl
+from pathlib import Path
 
 cli_config = {
-    "mkdocs": "all"  # Options should be basic/blog/api/scientific/all
+    "overwrite": {"help": "Overwrite existing files", "action": "store_true"},
+    "target-path": {"help": "Path to download files to", "default": "."},
 }
 
-folder_structure = {
-    "assets": {},
-    "docs": {"blog", "notebooks", "diagrams", "index.md"},
-    "requirements": {},
-    "scripts": {"mkdocs": {"gen_ref_pages.py"}},
-    ".readthedocs.yml": {},
-    "mkdocs.yml": {},
-    "pyproject.toml": {},
-}
+raw_file_host = (
+    "https://raw.githubusercontent.com/neozenith/python-onboarding-guide/main/"
+)
 
-MKDOCS_REQUIREMENTS = """
-# Bare minimum
-mkdocs
-mkdocs-material
-mkdocstrings
-mkdocstrings-python
-mkdocs-gen-files
-mkdocs-literate-nav
-mkdocs-section-index
-mkdocs-git-revision-date-localized-plugin
-mkdocs-git-authors-plugin
-mkdocs-render-swagger-plugin
+extra_files = ["Makefile", ".pre-commit-config.yaml", ".flake8", "pyproject.toml"]
 
-# Scientific + Engineering
-mkdocs-jupyter
-mkdocs-plotly-plugin
-mkdocs-blogging-plugin
-mkdocs-drawio-exporter
-"""
+
+def download_file(url, local_file_path, overwrite=False):
+    # Download the file from `url` and save it locally under `local_file_path`
+    ssl_context = ssl.create_default_context()
+    print(url)
+
+    output_file = Path(local_file_path)
+    if output_file.exists() and not overwrite:
+        print(f"File {local_file_path} already exists. Skipping download.")
+        return
+
+    req = Request(url, method="GET", data=None)
+    with urlopen(req, context=ssl_context) as response:
+        output_file.write_bytes(response.read())
 
 
 def __argparse_factory(config):
+    """Josh's Opinionated Argument Parser Factory."""
     parser = argparse.ArgumentParser()
+
+    # Take a dictionary of configuration. The key is the flag name, the value is a dictionary of kwargs.
     for flag, flag_kwargs in config.items():
+        # Automatically handle long and short case for flags
         lowered_flag = flag.lower()
         short_flag = f"-{lowered_flag[0]}"
         long_flag = f"--{lowered_flag}"
+
+        # If the value of the config dict is a dictionary then unpack it like standard kwargs for add_argument
+        # Otherwise assume the value is a simple default value like a string.
         if isinstance(flag_kwargs, dict):
             parser.add_argument(short_flag, long_flag, **flag_kwargs)
         else:
@@ -61,53 +63,14 @@ def __handle_args(config, args):
     return vars(parser.parse_args(args))
 
 
-def pyproject(project_name):
-    return f"""
-[project]
-name = "{project_name}"
-description = ""
-version = "0.1.0"
-authors = []
-
-
-[tool.setuptools]
-package-dir = {{"" = "src"}}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-"""
-
-
-def readthedocs(
-    python_version="3.10",
-    mkdocs_config_path="mkdocs.yml",
-    requirements_path="docs/requirements.txt",
-):
-    return f"""
-# Read the Docs configuration file for MkDocs projects
-# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
-
-# Required
-version: 2
-
-# Set the version of Python and other tools you might need
-build:
-  os: ubuntu-22.04
-  tools:
-    python: "{python_version}"
-
-mkdocs:
-  configuration: {mkdocs_config_path}
-
-# Optionally declare the Python requirements required to build your docs
-python:
-  install:
-  - requirements: {requirements_path}
-"""
-
-
 if __name__ == "__main__":
-    print(__handle_args(cli_config, sys.argv[1:]))
+    args = __handle_args(cli_config, sys.argv[1:])
+    print(args)
+    target_path = Path(args["target_path"])
+    for f in extra_files:
+        download_file(
+            f"{raw_file_host}{f}", target_path / f, overwrite=args["overwrite"]
+        )
     # TODO:
     # Create folder structures
     # Create config files
