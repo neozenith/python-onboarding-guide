@@ -5,20 +5,19 @@ If you are using this... why? I made it for me.
 It's ok, you can steal it. I won't tell anyone ;)
 """
 
+# Standard Library
 import argparse
-import sys
-from urllib.request import Request, urlopen
 import ssl
+import sys
 from pathlib import Path
+from urllib.request import Request, urlopen
 
 cli_config = {
     "overwrite": {"help": "Overwrite existing files", "action": "store_true"},
     "target-path": {"help": "Path to download files to", "default": "."},
 }
 
-raw_file_host = (
-    "https://raw.githubusercontent.com/neozenith/python-onboarding-guide/main/"
-)
+raw_file_host = "https://raw.githubusercontent.com/neozenith/python-onboarding-guide/main/"
 
 extra_files = ["Makefile", ".pre-commit-config.yaml", ".flake8", "pyproject.toml"]
 
@@ -68,9 +67,7 @@ if __name__ == "__main__":
     print(args)
     target_path = Path(args["target_path"])
     for f in extra_files:
-        download_file(
-            f"{raw_file_host}{f}", target_path / f, overwrite=args["overwrite"]
-        )
+        download_file(f"{raw_file_host}{f}", target_path / f, overwrite=args["overwrite"])
     # TODO:
     # Create folder structures
     # Create config files

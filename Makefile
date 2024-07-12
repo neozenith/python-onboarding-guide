@@ -20,6 +20,7 @@ dev:
     	--editable .  # <- the app/pkg itself
 
 fix:
+	.venv/bin/ruff format .
 	.venv/bin/ruff check . --fix
 	.venv/bin/pre-commit run
 	.venv/bin/isort .
