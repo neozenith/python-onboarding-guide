@@ -799,3 +799,35 @@ VSCode `.vscode/settings.json`
     "git-graph.repository.sign.commits": true
 }
 ```
+
+Setup your `git config` to conditionally load config based on the directory you are working in.
+
+https://git-scm.com/docs/git-config#_conditional_includes
+
+```
+[includeIf "gitdir:~/play"]
+	path = .gitconfig.play
+
+[includeIf "gitdir:~/work"]
+	path = gitconfig.work
+```
+
+`.gitconfig.play`
+
+```
+[user]
+  name = Josh Peak
+  email = <personal email>
+  signingkey = <key of personal signing key>
+```
+
+
+
+`.gitconfig.work`
+
+```
+[user]
+  name = Josh Peak
+  email = <work email
+  signingkey = <key of work signing key>
+```
