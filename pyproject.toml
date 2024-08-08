@@ -22,7 +22,9 @@ dev = [
     "ruff",
     "isort",
     "md-toc",
-    "watchdog"
+    "watchdog",
+    "testcontainers",
+    "aiohttp"
 ]
 
 [tool.setuptools]
