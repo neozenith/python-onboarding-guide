@@ -3,6 +3,8 @@
 <!--TOC-->
 
 - [Astral Tool Chain](#astral-tool-chain)
+  - [Precommit setup](#precommit-setup)
+  - [Installing Precommit and Astral tool chain](#installing-precommit-and-astral-tool-chain)
 
 <!--TOC-->
 
