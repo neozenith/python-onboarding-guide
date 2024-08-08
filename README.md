@@ -806,10 +806,10 @@ https://git-scm.com/docs/git-config#_conditional_includes
 
 ```
 [includeIf "gitdir:~/play"]
-	path = .gitconfig.play
+	path = ~/play/.gitconfig.play
 
 [includeIf "gitdir:~/work"]
-	path = gitconfig.work
+	path = ~/work/.gitconfig.work
 ```
 
 `.gitconfig.play`
@@ -828,6 +828,6 @@ https://git-scm.com/docs/git-config#_conditional_includes
 ```
 [user]
   name = Josh Peak
-  email = <work email
+  email = <work email>
   signingkey = <key of work signing key>
 ```
