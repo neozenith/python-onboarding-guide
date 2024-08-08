@@ -4,7 +4,7 @@ Mini blog to myself about the technical steps to get a python development enviro
 
 ## Git
 
-- [`precommit`](guides/)
+- [`precommit`](guides/ASTRAL_RUFF_UV.md)
 - [GPG Git Commit Signing & Conditional Config](guides/GPG_COMMIT_SIGNING.md)
 
 ## Python Environment
