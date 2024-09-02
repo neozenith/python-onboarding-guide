@@ -4,6 +4,7 @@
         "eamodio.gitlens",
         "mhutchie.git-graph",
         "github.vscode-github-actions",
-        "elagil.pre-commit-helper"
+        "elagil.pre-commit-helper",
+        "boto3typed.boto3-ide"
     ]
 }

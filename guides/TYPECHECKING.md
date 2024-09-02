@@ -11,6 +11,7 @@
     - [😰 This does not work](#-this-does-not-work-1)
   - [Level 3 - Strict](#level-3---strict)
   - [Further Reading](#further-reading)
+- [Typechecking Boto3](#typechecking-boto3)
 
 <!--TOC-->
 
@@ -175,3 +176,22 @@ This pretty much disallows the use of `Any` amongst some other corner cases, but
 ## Further Reading
 
 Checkout the [MyPy Existing Code Guide](https://mypy.readthedocs.io/en/stable/existing_code.html) for more details.
+
+# Typechecking Boto3
+
+https://youtype.github.io/boto3_stubs_docs/
+
+```sh
+# install type annotations only for boto3
+python -m pip install boto3-stubs
+
+# install boto3 type annotations
+# for ec2, s3, rds, lambda, sqs, dynamo and cloudformation
+python -m pip install 'boto3-stubs[essential]'
+
+# or install annotations for services you use
+python -m pip install 'boto3-stubs[s3,dynamodb,lambda]'
+
+# or install annotations in sync with boto3 version
+python -m pip install 'boto3-stubs[boto3]'
+```
