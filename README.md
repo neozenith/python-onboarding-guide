@@ -2,6 +2,8 @@
 
 Mini blog to myself about the technical steps to get a python development environment setup.
 
+Below are sections with links to sub-blogs where I am collecting and curating content.
+
 ## Python Environment
 
 - [`PyEnv`](guides/PYENV.md)
