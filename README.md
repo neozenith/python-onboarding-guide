@@ -19,6 +19,7 @@ Below are sections with links to sub-blogs where I am collecting and curating co
 
 ## Python Tooling
 
+- [Dockerfiles and Containerisation](guides/CONATINERS.md)
 - [`testcontainers`](guides/TESTCONTAINERS_PYTEST.md)
 - [Typechecking with `mypy`](guides/TYPECHECKING.md)
 - [Documentation Generation `mkdocs`](guides/DOCS_MKDOCS.md)
