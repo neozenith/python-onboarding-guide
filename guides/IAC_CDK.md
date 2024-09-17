@@ -3,6 +3,13 @@
 This micro blog will cover all the fun little pieces I collate along the way about AWS CDK for Infrstructure as Code.
 
 <!--TOC-->
+
+- [AWS CDK](#aws-cdk)
+  - [Quickstart](#quickstart)
+  - [Automating Diagrams](#automating-diagrams)
+    - [`Makefile` snippet:](#makefile-snippet)
+    - [Markdown Snippet](#markdown-snippet)
+
 <!--TOC-->
 
 
