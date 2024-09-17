@@ -22,6 +22,7 @@ Below are sections with links to sub-blogs where I am collecting and curating co
 - [`testcontainers`](guides/TESTCONTAINERS_PYTEST.md)
 - [Typechecking with `mypy`](guides/TYPECHECKING.md)
 - [Documentation Generation `mkdocs`](guides/DOCS_MKDOCS.md)
+- [AWS CDK](guides/IAC_CDK.md)
 
 ## Notebooks / Google Colab
 
