@@ -30,6 +30,7 @@ Below are sections with links to sub-blogs where I am collecting and curating co
  - Current best practices are reflected in https://github.com/neozenith/notebook-network-maximum-parallelism
  - For some tricks to integrate Google Colab with the rest of GSuite see this tutorial: https://www.youtube.com/watch?v=El14YhjPRhQ&t=57s
 
-## Meta
+## Meta / Misc
 
  - [Markdown and Github Flavored Markdown tricks for micro-blogging](guides/MARKDOWN.md)
+ - [PEM Files](guides/PEM.md)
