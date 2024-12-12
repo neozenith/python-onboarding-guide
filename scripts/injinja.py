@@ -36,7 +36,7 @@ import tomllib
 import logging
 import pathlib
 import sys
-import pyyaml as yaml
+import yaml
 
 log = logging.getLogger(__name__)
 
