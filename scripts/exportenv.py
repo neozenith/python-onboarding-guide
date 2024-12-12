@@ -12,6 +12,12 @@
 #
 # Use in combination with `eval $(python3 exportenv.py)` to load the environment variables into the current shell.
 #
+# One liner:
+#
+# curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/exportenv.py | python3
+#
+# eval "$(curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/exportenv.py | python3)"
+#
 import logging
 import pathlib
 import sys
