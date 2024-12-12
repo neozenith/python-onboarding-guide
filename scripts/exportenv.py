@@ -18,6 +18,11 @@
 #
 # eval "$(curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/exportenv.py | python3)"
 #
+# Using the extra args:
+# curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/exportenv.py | sh -c 'python3 - --debug'
+# curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/exportenv.py | sh -c 'python3 - --unset'
+# curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/exportenv.py | sh -c 'python3 - --debug --unset'
+#
 import logging
 import pathlib
 import sys
