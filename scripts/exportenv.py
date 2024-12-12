@@ -24,7 +24,7 @@ import sys
 
 log = logging.getLogger(__name__)
 
-log_level = logging.DEBUG if "--debug" in sys.argv else logging.INFO
+log_level = logging.DEBUG # if "--debug" in sys.argv else logging.INFO
 logging.basicConfig(level=log_level, format='%(message)s')
 
 log.debug(f"# {sys.argv}")
