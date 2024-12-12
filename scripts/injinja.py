@@ -16,7 +16,7 @@
 #
 # This makes for VERY dynamic config.
 # Then that config IS the config provided for a target template.
-# This final template could be SQL, js, python or even more JSON or YAML.
+# This final template could be terraform, SQL, js, python or even more JSON or YAML.
 #
 # Output defaults to stdout or an output file can be specified.
 #
