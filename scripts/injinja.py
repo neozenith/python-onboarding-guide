@@ -83,7 +83,7 @@ def load_config(filename: str, environment_variables: Optional[Dict[str, str]] =
         return json.loads(content)
     elif any([filename.lower().endswith(ext) for ext in ["yml", "yaml"]]):
         return yaml.safe_load(content)
-    elif [filename.lower().endswith("toml"):
+    elif filename.lower().endswith("toml"):
         return tomllib.loads(content)
 
     raise ValueError(f"File type of {filename} not supported.")  # pragma: no cover
