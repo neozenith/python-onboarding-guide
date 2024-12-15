@@ -1,4 +1,4 @@
-# Testcontainers + PyTest
+# Pytest
 
 <!--TOC-->
 
@@ -9,13 +9,44 @@
 
 <!--TOC-->
 
-## Pytest Fixtures Using TestContainers
+## Conditionally Raising Exceptions
+
+Kept forgetting what to query when trying to find this so I am adding it to my playbook of snippets
+
+https://docs.pytest.org/en/stable/example/parametrize.html#parametrizing-conditional-raising
+
+```python
+from contextlib import nullcontext
+
+import pytest
+
+@pytest.mark.parametrize(
+    "example_input,expectation",
+    [
+        (3, nullcontext(2)),
+        (2, nullcontext(3)),
+        (1, nullcontext(6)),
+        (0, pytest.raises(ZeroDivisionError)),
+    ],
+)
+def test_division(example_input, expectation):
+    """Test how much I know division."""
+    with expectation as e:
+        assert (6 / example_input) == e
+```
+
+## Testcontainers + PyTest
+
+
+
+### Pytest Fixtures Using TestContainers
 
 Make a test fixture available for the duration of the entire pytest `session` when you have the following in your `conftest.py`.
 
 Assuming you have a `docker-compose.yml` in `containers/docker/docker-compose.yml`.
 
-### `tests/conftest.py`
+#### `tests/conftest.py`
+
 ```python
 # Third Party
 import pytest
@@ -31,7 +62,8 @@ def _docker_compose():
 
 And here is an example test using it:
 
-### `tests/test_example.py`
+#### `tests/test_example.py`
+
 ```python
 # Third Party
 import pytest
