@@ -11,6 +11,7 @@ Below are sections with links to sub-blogs where I am collecting and curating co
 ## Git
 - [GPG Git Commit Signing & Conditional Config](guides/GPG_COMMIT_SIGNING.md)
 - [`precommit`](guides/ASTRAL_RUFF_UV.md)
+- [Auto-Export Git branch in ZSH](guides/ZSH_GIT_BRANCH.md)
 
 ## Python Dependency Management
 
