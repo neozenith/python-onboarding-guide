@@ -21,11 +21,6 @@ function set_git_branch() {
 # Make sure we have add-zsh-hook available
 autoload -U add-zsh-hook
 
-# Create a function that will call our set_git_branch
-function update_prompt() {
-  set_git_branch
-}
-
 # Register the function to run just before each new prompt
-add-zsh-hook precmd update_prompt
+add-zsh-hook precmd set_git_branch
 ```
