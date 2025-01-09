@@ -1,0 +1,39 @@
+# https://docs.getdbt.com/docs/build/packages
+# https://docs.getdbt.com/reference/commands/deps
+
+packages:
+  
+  ############# AUTOMATIONS #############
+
+  # https://hub.getdbt.com/dbt-labs/codegen/latest/
+  - package: dbt-labs/codegen
+    version: [">=0.13.1", "<0.14.0"]
+
+  # https://hub.getdbt.com/Montreal-Analytics/snowflake_utils/latest/
+  #
+  # Helper macros to perform 2 step clone patterns
+  #
+  # - package: Montreal-Analytics/snowflake_utils
+  #   version: 0.6.3
+
+
+  ############# TESTING TOOLS #############
+
+  # https://hub.getdbt.com/calogica/dbt_expectations/latest/
+  - package: calogica/dbt_expectations
+    version: [">=0.10.0", "<0.11.0"]
+
+  # https://hub.getdbt.com/dbt-labs/dbt_utils/latest/
+  - package: dbt-labs/dbt_utils
+    version: [">=1.3.0", "<1.4.0"]
+
+
+  ############# FINOPS AND MONITORING #############
+
+  # https://hub.getdbt.com/get-select/dbt_snowflake_monitoring/latest/
+  #
+  # From the SELECT team, a dbt package to help you monitor Snowflake performance and costs.
+  # https://select.dev/docs/dbt-snowflake-monitoring/example-usage
+  #
+  # - package: get-select/dbt_snowflake_monitoring
+  #   version: 5.3.1
