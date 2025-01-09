@@ -1,0 +1,51 @@
+name: dbt Dataverse CICD
+on:
+  push:
+    paths:
+      - dbt-dataverse/**
+  pull_request:
+    paths:
+      - dbt-dataverse/**
+
+permissions:
+  contents: read
+
+jobs:
+  test-macros:
+    name: Test dbt Macros
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dbt-dataverse
+    env:
+      SNOWFLAKE_USERNAME: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_ACCOUNTNAME: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+  
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: dbt-dataverse/.python-version
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Install dbt dependencies
+        run: uv run dbt deps
+
+      - name: Run Ruff Linting
+        run: uv run ruff check
+
+      - name: Run SQLFluff Linting
+        run: uv run sqlfluff lint models
+
+      - name: Run PyTest Tests
+        run: uv run pytest 
+  
