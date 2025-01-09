@@ -1,0 +1,9 @@
+# https://docs.getdbt.com/faqs/Docs/documenting-macros
+version: 2
+
+macros:
+  - name: clean_slice
+    description: Take in environment variables and project vars to determine the "slice" and clean it so that it is save as part of a snowflake schema
+  - name: data_environment
+    description: Take in environment variables and determine the data environment. Default to DEV.
+    
