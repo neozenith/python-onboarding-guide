@@ -1,0 +1,39 @@
+name: 'my_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+# https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
+# See also profiles.yml
+profile: 'dbt_project'
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+# Custom Naming Conventions
+# https://docs.getdbt.com/guides/customize-schema-alias?step=1
+
+models:
+  my_dbt_project:
+    +materialized: table
+
+    landing:
+      +database: landing
+      +schema: landing
+      
+    processing:
+      +database: processing
+      +schema: processing
+
+    presentation:
+      +database: presentation
+      +schema: presentation
+
+vars:
+  # https://github.com/calogica/dbt-expectations?tab=readme-ov-file#variables
+  'dbt_date:time_zone': 'Australia/Sydney'
+
+  # --vars \"git_branch: $(git rev-parse --abbrev-ref HEAD)\"
+  # OR set the environment variables DBT_CLOUD_GIT_BRANCH or DBT_GIT_BRANCH
+  # env DBT_GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)" uv run dbt run
+  'git_branch': ''
