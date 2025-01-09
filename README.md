@@ -26,6 +26,10 @@ Below are sections with links to sub-blogs where I am collecting and curating co
 - [Documentation Generation `mkdocs`](guides/DOCS_MKDOCS.md)
 - [AWS CDK](guides/IAC_CDK.md)
 
+# DBT
+
+- [Opinionated DBT Project](dbt-project/README.md)
+
 ## Notebooks / Google Colab
 
  - Current best practices are reflected in https://github.com/neozenith/notebook-network-maximum-parallelism
