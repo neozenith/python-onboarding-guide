@@ -1,0 +1,80 @@
+[project]
+name = "dbt-project"
+version = "0.1.0"
+description = "Josh's opinionated dbt project"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dbt-snowflake>=1.8.4",
+    "dbt>=1.0.0.38.22",
+    "snowflake-cli>=3.2.1",
+]
+
+[dependency-groups]
+dev = [
+    "isort>=5.13.2",
+    "md-toc>=9.0.0",
+    "mypy>=1.13.0",
+    "pytest-xdist>=3.6.1",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.2",
+    "shandy-sqlfmt[jinjafmt]>=0.24.0",
+    "sqlfluff>=3.3.0",
+    "sqlfluff-templater-dbt>=3.3.0",
+]
+
+[tool.sqlfmt]
+line_length = 120
+exclude=["target/**/*", "dbt_packages/**/*", ".venv/**/*", "pytests/**/*"]
+
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",# pycodestyle
+    "F", # Pyflakes
+    "UP", # pyupgrade
+    "B", # flake8-bugbear
+    "SIM", # flake8-simplify
+    "I", # isort
+    "PTH", # falek8-use-pathlib 
+    "TCH", # flake8-type-checking
+    # "S", # flake8-bandit
+    "C90", #mccabe
+]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+
+[tool.ruff.lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 5.
+max-complexity = 10
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+import_heading_stdlib = "Standard Library"
+import_heading_firstparty = "Our Libraries"
+import_heading_thirdparty = "Third Party"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+
+addopts = "-s -vvv --color=yes -n auto"
+
+testpaths = [
+    "pytests"
+]
