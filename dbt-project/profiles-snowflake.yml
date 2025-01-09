@@ -1,0 +1,102 @@
+# The Profiles file allows us to define multiple "targets"
+# 
+# A "target" is connection credentials as well as target specific configurations
+#
+# Further reading:
+# https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml
+# https://docs.getdbt.com/docs/core/connect-data-platform/snowflake-setup
+# https://docs.getdbt.com/reference/dbt-jinja-functions/env_var
+
+
+# This is the top level "profile" name referenced in dbt_project.yml
+dbt_project:
+
+  # This is the default "target"
+  target: dev
+
+  # These are the definitions of other targets
+  outputs:
+
+    # Local dev with SSH Keypair
+    dev:
+      
+      type: snowflake
+      
+      # https://docs.getdbt.com/docs/core/connect-data-platform/snowflake-setup#key-pair-authentication
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY', '') }}"
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PASSPHRASE', '') }}"
+
+      account: "{{ env_var('SNOWFLAKE_ACCOUNTNAME', '') }}"
+      user: "{{ env_var('SNOWFLAKE_USERNAME', '') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', '') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}" # Note the default warehouse but allowed for specific users to override
+
+      # Default database and schema for this target do not really matter since they get overridden by model configuration in dbt_project.yml
+      database: processing
+      schema: processing
+      
+      threads: 4
+      client_session_keep_alive: False # Do not keep sessions alive, this will force reauthenticating after 4 hours which is important for credential rotation on compromised credentials.
+
+
+    # Local dev with password
+    dev-password:
+      # default target is 'dev'. So to use this target you will need to specify --target=dev-password
+      type: snowflake
+
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
+
+      account: "{{ env_var('SNOWFLAKE_ACCOUNTNAME', '') }}"
+      user: "{{ env_var('SNOWFLAKE_USERNAME', '') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', '') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}" # Note the default warehouse but allowed for specific users to override
+
+      # Default database and schema for this target do not really matter since they get overridden by model configuration in dbt_project.yml
+      database: processing
+      schema: processing
+      threads: 4
+      client_session_keep_alive: False # Do not keep sessions alive, this will force reauthenticating after 4 hours which is important for credential rotation on compromised credentials.
+      
+
+    test:
+      type: snowflake
+
+      # https://docs.getdbt.com/docs/core/connect-data-platform/snowflake-setup#key-pair-authentication
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY', '') }}"
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PASSPHRASE', '') }}" 
+
+      account: "{{ env_var('SNOWFLAKE_ACCOUNTNAME') }}"
+      user: TEST_DBT_USER
+      role: TEST_DBT_ROLE
+      
+      # Default database and schema for this target do not really matter since they get overridden by model configuration in dbt_project.yml
+      database: processing
+      schema: processing
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}" # Note the default warehouse but allowed to override
+      
+      threads: 4
+      client_session_keep_alive: False # Do not keep sessions alive, this will force reauthenticating after 4 hours which is important for credential rotation on compromised credentials.
+
+
+    prod:
+      type: snowflake
+
+      # https://docs.getdbt.com/docs/core/connect-data-platform/snowflake-setup#key-pair-authentication
+      # Service accounts for TEST and PROD will use SSH Key Pairs from environment variables.
+      # They default to an empty string so that this file can validly template Jinja2 variables 
+      # for the DEV target where they are not needed.
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY', '') }}"
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PASSPHRASE', '') }}" 
+
+      account: "{{ env_var('SNOWFLAKE_ACCOUNTNAME') }}"
+      user: PROD_DBT_USER
+      role: PROD_DBT_ROLE
+
+      # Default database and schema for this target do not really matter since they get overridden by model configuration in dbt_project.yml
+      database: processing
+      schema: processing
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}" # Note the default warehouse but allowed to override
+      
+      threads: 4
+      client_session_keep_alive: False # Do not keep sessions alive, this will force reauthenticating after 4 hours which is important for credential rotation on compromised credentials.
+
