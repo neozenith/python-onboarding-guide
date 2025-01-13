@@ -2,9 +2,10 @@
 
     {%- set default_schema = target.schema -%}
     {%- set data_env = data_environment() | trim | upper -%}
-    {%- set cleaned_slice = clean_slice() -%}
+    {%- set cleaned_slice = clean_slice() | trim | upper -%}
 
     {#- Enfore a slice gets defined as part of the schema in non-PROD environments. -#}
+
     {%- if cleaned_slice is not none and cleaned_slice | length > 0 -%}
         {%- set cleaned_slice = cleaned_slice ~ "__" -%}
     {%- else -%}
