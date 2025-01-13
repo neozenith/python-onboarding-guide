@@ -3,7 +3,12 @@ version: 2
 
 macros:
   - name: clean_slice
-    description: Take in environment variables and project vars to determine the "slice" and clean it so that it is save as part of a snowflake schema
+    description: |
+      A "slice" is a unit of change. This is often a git branch name or the tuple of a PR number, Job ID and Run ID. 
+      This "slice" acts as a schema prefix to group the unit of change in DEV and TEST. In PROD the slice is an empty string. 
+      It takes in environment variables and project vars to determine the "slice" and clean it so that it is used as part of a snowflake schema name.
   - name: data_environment
-    description: Take in environment variables and determine the data environment. Default to DEV.
+    description: |
+      Take in environment variables and determine the data environment. Default to DEV.
+      Must be explicitly DEV, TEST, PROD. Others throw a compilation error.
     
