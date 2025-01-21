@@ -8,12 +8,12 @@
 # https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script
 # https://packaging.python.org/en/latest/specifications/inline-script-metadata/#inline-script-metadata
 # Adapted from https://github.com/dbt-labs/jaffle-shop/blob/main/.github/workflows/scripts/dbt_cloud_run_job.py
-import os
-import time
-import json
-import requests
-import logging
 import asyncio
+import json
+import logging
+import os
+
+import requests
 
 # Set up logging
 log = logging.getLogger(__name__)
@@ -97,7 +97,9 @@ async def main():
     # run job
     run_id: int = 0
     try:
-        run_id = await run_job(req_job_url, req_auth_header, job_cause, git_branch, github_pr_id, git_sha, schema_override)
+        run_id = await run_job(
+            req_job_url, req_auth_header, job_cause, git_branch, github_pr_id, git_sha, schema_override
+        )
     except Exception as e:
         log.error(f"ERROR! - Could not trigger job:\n {e}")
         raise e

@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
@@ -32,21 +33,23 @@
 # curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/injinja.py | sh -c "python3 - -t template.j2 -c config.yml -e home_dir=$HOME"
 #
 
+# Standard Library
 import argparse
 import json
 import logging
 import pathlib
 import sys
-import tomllib
 from typing import Any
 
+# Third Party
 import jinja2
+import tomllib
 import yaml
 
 log = logging.getLogger(__name__)
 
 log_level = logging.DEBUG if "--debug" in sys.argv else logging.INFO
-logging.basicConfig(level=log_level, format='%(message)s')
+logging.basicConfig(level=log_level, format="%(message)s")
 log.debug(f"# {sys.argv}")
 log.debug(f"# {pathlib.Path.cwd()}")
 
@@ -55,12 +58,14 @@ cli_config = {
     "template": {"required": True, "help": "The Jinja2 template file to use."},
     "config": {"required": True, "help": "The configuration file to use."},
     "env": {"action": "append", "default": [], "help": "Environment variables to pass to the template."},
-    "output": "stdout"
+    "output": "stdout",
 }
+
 
 def dict_from_keyvalue_list(args: list[str] | None = None) -> dict[str, str] | None:
     """Convert a list of 'key=value' strings into a dictionary."""
     return {k: v for k, v in [x.split("=") for x in args]} if args else None
+
 
 def merge_template(template_filename: str, config: dict[str, Any] | None) -> str:
     """Load a Jinja2 template from file and merge configuration."""
@@ -69,7 +74,6 @@ def merge_template(template_filename: str, config: dict[str, Any] | None) -> str
 
     # Step 2: Treat raw_content as a Jinja2 template if providing configuration
     if config:
-
         # NOTE: Providing jinja 2.11.x compatable version to better cross operate
         # with dbt-databricks v1.2.2 and down stream dbt-spark and dbt-core
         if int(jinja2.__version__[0]) >= 3:
@@ -101,6 +105,7 @@ def load_config(filename: str, environment_variables: dict[str, str] | None = No
 
     raise ValueError(f"File type of {filename} not supported.")  # pragma: no cover
 
+
 def __argparse_factory(config):
     """Josh's Opinionated Argument Parser Factory."""
     parser = argparse.ArgumentParser()
@@ -130,19 +135,19 @@ def __handle_args(config, args):
     if script_filename in args:
         args.remove(script_filename)
     return vars(__argparse_factory(config).parse_args(args))
-    
+
 
 def main(args):
-  args = __handle_args(cli_config, sys.argv)
-  env = dict_from_keyvalue_list(args['env'])
-  conf = load_config(args['config'], env)
-  merged_template = merge_template(args['template'], conf)
-  
-  if args['output'] == 'stdout':
-    print(merged_template)
-  else:
-    pathlib.Path(args['output']).write_text(merged_template)
-  
+    args = __handle_args(cli_config, sys.argv)
+    env = dict_from_keyvalue_list(args["env"])
+    conf = load_config(args["config"], env)
+    merged_template = merge_template(args["template"], conf)
 
-if __name__ == '__main__':
-  main(sys.argv)
+    if args["output"] == "stdout":
+        print(merged_template)
+    else:
+        pathlib.Path(args["output"]).write_text(merged_template)
+
+
+if __name__ == "__main__":
+    main(sys.argv)

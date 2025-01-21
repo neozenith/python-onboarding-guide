@@ -7,7 +7,7 @@ import subprocess
 # Third Party
 import pytest
 
-DEPLOYMENT_ENV_VARS = ["DBT_CLOUD_PR_ID" "DBT_CLOUD_JOB_ID" "DBT_CLOUD_RUN_ID"]
+DEPLOYMENT_ENV_VARS = ["DBT_CLOUD_PR_ID", "DBT_CLOUD_JOB_ID", "DBT_CLOUD_RUN_ID"]
 
 DEVELOPMENT_ENV_VARS = ["DBT_CLOUD_GIT_BRANCH", "DBT_GIT_BRANCH"]
 
@@ -85,14 +85,14 @@ def test_macro_generate_schema_name(
     if expected_data_env is None:
         # Path where no manifest should get generated due to invalid context configurations
         assert output.returncode == 2, f"""Parsing succeeded when it should have thrown an Invalid DBT_ENV_TYPE error. 
-        dbt output: {output.stdout.decode('utf-8')}"""
+        dbt output: {output.stdout.decode("utf-8")}"""
 
         assert "Error: Invalid DBT_ENV_TYPE value:" in output.stdout.decode("utf-8")
 
     elif not is_branch_defined and not is_deployment and expected_data_env != "PROD":
         # No environment variables set to define a slice and in non-PROD environment.
         assert output.returncode == 2, f"""Parsing succeeded when it should have thrown an Invalid Slice error:
-        {output.stdout.decode('utf-8')}"""
+        {output.stdout.decode("utf-8")}"""
         assert "Error: Data Environment is non-PROD and no slice is defined for " in output.stdout.decode("utf-8")
 
     else:
