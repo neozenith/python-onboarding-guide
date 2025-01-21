@@ -1,0 +1,36 @@
+name: dbt Cloud CD - TEST PR Job
+on:
+  pull_request:
+    paths:
+      - dbt-project/**
+
+permissions:
+  contents: read
+
+jobs:
+
+  trigger-test-dbt-cloud-job:
+    if: github.event_name == 'pull_request' && !github.event.pull_request.draft
+    name: trigger-test-dbt-cloud-job
+    runs-on: ubuntu-latest
+    
+    env:
+      DBT_CLOUD_HOST: ${{ vars.DBT_CLOUD_HOST }}
+      DBT_ACCOUNT_ID: ${{ vars.DBT_CLOUD_ACCOUNT_ID }}
+      DBT_PROJECT_ID: ${{ vars.DBT_CLOUD_PROJECT_ID }}
+      GITHUB_PR_ID: ${{ github.event.pull_request.number }}
+      DBT_JOB_CAUSE: "Github Pull Request #${{ github.event.pull_request.number }}"
+      DBT_JOB_SHA: ${{ github.event.pull_request.head.sha }}
+      DBT_CLOUD_JOB_ID: ${{ vars.DBT_CLOUD_TEST_JOB_ID }}
+      DBT_CLOUD_SERVICE_TOKEN: ${{ secrets.DBT_CLOUD_TEST_SERVICE_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4  
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Trigger dbt cloud TEST Job
+        run: uv run .github/workflows/scripts/dbt_cicd.py
+
+  
