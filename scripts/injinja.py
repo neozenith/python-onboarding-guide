@@ -34,6 +34,8 @@
 #
 # TODO: Add custom directives like !include for YAML parser inspired by:
 # https://github.com/littleK0i/SnowDDL/blob/master/snowddl/parser/_yaml.py
+# TODO: Add merging of collections of JSON or YAML if a pathspec is given
+# https://deepmerge.readthedocs.io/en/latest/index.html
 
 # Standard Library
 import argparse
