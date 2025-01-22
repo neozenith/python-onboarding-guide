@@ -32,6 +32,8 @@
 #
 # curl -fsSL https://raw.githubusercontent.com/neozenith/python-onboarding-guide/refs/heads/main/scripts/injinja.py | sh -c "python3 - -t template.j2 -c config.yml -e home_dir=$HOME"
 #
+# TODO: Add custom directives like !include for YAML parser inspired by:
+# https://github.com/littleK0i/SnowDDL/blob/master/snowddl/parser/_yaml.py
 
 # Standard Library
 import argparse
