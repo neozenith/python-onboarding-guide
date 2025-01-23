@@ -7,19 +7,19 @@ There are **\*three types of Code Review** inspired by conference talks by Trish
 
 ## The Three Types
 
-### Draft / Early Feedback
+### Draft / Early Feedback 📝
 
 Github has a feature to mark a Pull Request as a draft. Often this won't run CI checks as it is known that it is in a partial working state.
 
 These are great to get early feedback about design decisions before sinking too much effort.
 
-### Educational
+### Educational 📚
 
 Sometimes the person creating the Pull Request is the Subject Matter Expect (SME). 
 
 They have authority to just push the change through, but it is important for others to see and follow along what the change _**IS**_ and _**WHY**_.
 
-### Goalkeeper
+### Goalkeeper 🥅
 
 This is probably the more common one that people think of when it comes to code review. They are looking at quality control and trying to stop bugs getting through.
 
