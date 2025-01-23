@@ -4,19 +4,9 @@ Mini blog to myself about the technical steps to get a python development enviro
 
 Below are sections with links to sub-blogs where I am collecting and curating content.
 
-## Python Environment
-
-- [`PyEnv`](guides/PYENV.md)
-
-## Git
-- [GPG Git Commit Signing & Conditional Config](guides/GPG_COMMIT_SIGNING.md)
-- [`precommit`](guides/ASTRAL_RUFF_UV.md)
-- [Auto-Export Git branch in ZSH](guides/ZSH_GIT_BRANCH.md)
-
-## Python Dependency Management
+## Python Environment and Dependency Management
 
 - [Astral `uv`](guides/ASTRAL_RUFF_UV.md)
-- [`pip` and `piptools`](guides/PIPTOOLS.md)
 
 ## Python Tooling
 
@@ -25,6 +15,11 @@ Below are sections with links to sub-blogs where I am collecting and curating co
 - [Typechecking with `mypy`](guides/TYPECHECKING.md)
 - [Documentation Generation `mkdocs`](guides/DOCS_MKDOCS.md)
 - [AWS CDK](guides/IAC_CDK.md)
+
+## Git
+- [GPG Git Commit Signing & Conditional Config](guides/GPG_COMMIT_SIGNING.md)
+- [`precommit`](guides/ASTRAL_RUFF_UV.md)
+- [Auto-Export Git branch in ZSH](guides/ZSH_GIT_BRANCH.md)
 
 # DBT
 
