@@ -25,14 +25,16 @@ This is probably the more common one that people think of when it comes to code 
 
 The key goals they need to ask themselves when reviewing code:
 
-> Will this break production?
-> Can someone else reasonably maintain this later?
+> **Q1**: Will this break production?
+> 
+> **Q2**: Can someone else reasonably maintain this later?
 
 Sometimes a solution isn't exactly how you would expect it to be solved, that is ok. As a reviewer you should be open to letting these through. This is to help avoid nitpicking.
 
-**Nitpicking should never block code getting released**.
+⚠️ **Nitpicking should never block code getting released**. ⚠️
 
-The regulating factor here is that if the code could not reasonably be maintained by someone else, then that is leaving tech debt and lowering the bar for the whole project.
+The regulating factor is that if "_the code could not reasonably be maintained by someone else_", then that is leaving tech debt and lowering the bar for the whole project. 
+These should get addressed.
 
 ## Before Code Review
 
