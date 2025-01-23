@@ -39,3 +39,4 @@ Below are sections with links to sub-blogs where I am collecting and curating co
 
  - [Markdown and Github Flavored Markdown tricks for micro-blogging](guides/MARKDOWN.md)
  - [PEM Files](guides/PEM.md)
+ - [Code Review](guides/CODE_REVIEW.md)
