@@ -9,7 +9,6 @@ repos:
     # Run the linter.
     - id: ruff
       types_or: [ python, pyi, jupyter ]
-      args: [ --fix ]
 - repo: https://codeberg.org/frnmst/md-toc
   # Release updates (ATOM) https://codeberg.org/frnmst/md-toc/tags.atom
   rev: 9.0.0 # set a GIT tag

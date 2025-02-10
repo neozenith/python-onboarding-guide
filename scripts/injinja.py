@@ -1,4 +1,5 @@
 # ruff: noqa: E501
+# ruff: noqa: I001
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
@@ -43,11 +44,11 @@ import json
 import logging
 import pathlib
 import sys
+import tomllib
 from typing import Any
 
 # Third Party
 import jinja2
-import tomllib
 import yaml
 
 log = logging.getLogger(__name__)
