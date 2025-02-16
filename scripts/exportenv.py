@@ -31,23 +31,62 @@ import sys
 log = logging.getLogger(__name__)
 
 log_level = logging.DEBUG if "--debug" in sys.argv else logging.INFO
-logging.basicConfig(level=log_level, format="%(message)s")
 
-log.debug(f"# {sys.argv}")
-log.debug(f"# {pathlib.Path.cwd()}")
 
-should_unset = "--unset" in sys.argv
+def __parse_env_line(line: str) -> tuple[str | None, str | None]:
+    """Parses a single line into a key-value pair. Handles quoted values and inline comments.
+    Returns (None, None) for invalid lines."""
+    # Guard checks for empty lines or lines without '='
+    line = line.strip()
+    if not line or line.startswith("#") or "=" not in line:
+        return None, None
 
-env_file = pathlib.Path.cwd() / ".env"
+    # Split the line into key and value at the first '='
+    key, value = line.split("=", 1)
+    key = key.strip()
 
-if env_file.exists():
-    with env_file.open() as f:
-        for line in f:
-            if not line.strip() or line.strip().startswith("#"):
-                continue
+    # Use shlex to process the value (handles quotes and comments)
+    lexer = shlex.shlex(value, posix=True)
+    lexer.whitespace_split = True  # Tokenize by whitespace
+    value = "".join(lexer)  # Preserve the full quoted/cleaned value
 
-            key, value = line.strip().split("=", 1)
+    return key, value
+
+
+def read_env_file(file_path: str | pathlib.Path) -> dict[str, str] | None:
+    """Reads a .env file and returns a dictionary of key-value pairs.
+    If the file does not exist or is not a regular file, returns None.
+    """
+    file = filepath if type(file_path) == pathlib.Path else pathlib.Path(file_path)
+    return (
+        {
+            key: value
+            for key, value in map(__parse_env_line, file.read_text().splitlines())
+            if key is not None and value is not None
+        }
+        if file.is_file()
+        else None
+    )
+
+def main(should_unset: bool = False):
+    env_file = pathlib.Path.cwd() / ".env"
+    if env_file.exists():
+        env_values = read_env_file(env_file)
+
+        for key, value in env_values.items():
             if should_unset:
                 log.info(f"unset {key}")
             else:
                 log.info(f"export {key}={value}")
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=log_level, format="%(message)s")
+
+    log.debug(f"# {sys.argv}")
+    log.debug(f"# {pathlib.Path.cwd()}")
+    should_unset = "--unset" in sys.argv
+    main(should_unset)
+
+    
+
