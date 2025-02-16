@@ -27,6 +27,7 @@
 import logging
 import pathlib
 import sys
+import shlex
 
 log = logging.getLogger(__name__)
 
