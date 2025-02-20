@@ -58,7 +58,7 @@ def read_env_file(file_path: str | pathlib.Path) -> dict[str, str] | None:
     """Reads a .env file and returns a dictionary of key-value pairs.
     If the file does not exist or is not a regular file, returns None.
     """
-    file = filepath if type(file_path) == pathlib.Path else pathlib.Path(file_path)
+    file = file_path if type(file_path) is pathlib.Path else pathlib.Path(file_path)
     return (
         {
             key: value
@@ -73,16 +73,16 @@ def main(should_unset: bool = False):
     env_file = pathlib.Path.cwd() / ".env"
     if env_file.exists():
         env_values = read_env_file(env_file)
-
-        for key, value in env_values.items():
-            if should_unset:
-                log.info(f"unset {key}")
-            else:
-                log.info(f"export {key}={value}")
+        if env_values:
+            for key, value in env_values.items():
+                if should_unset:
+                    log.info(f"unset {key}")
+                else:
+                    log.info(f"export {key}={value}")
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=log_level, format="%(message)s")
+    logging.basicConfig(level=log_level, format="%(message)s", handlers=[logging.StreamHandler(sys.stdout)])
 
     log.debug(f"# {sys.argv}")
     log.debug(f"# {pathlib.Path.cwd()}")
