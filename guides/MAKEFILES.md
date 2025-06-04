@@ -61,7 +61,7 @@ init: .venv/bin/python3 uv.lock
 lock: uv.lock
 
 uv.lock: pyproject.toml .venv/bin/python3
-	.venv/bin/python3 -m uv lock
+	.venv/bin/python3 -m uv lock --dev -U
 
 # Install the necessary dependencies depending if it is prod or dev build
 # The .make/*-deps-installed is a sentinel file we 'touch' to mark the job complete with '@touch $@'
@@ -72,7 +72,7 @@ prod: .make/prod-deps-installed
 
 dev: .make/dev-deps-installed
 .make/dev-deps-installed: uv.lock
-	.venv/bin/python3 -m uv sync
+	.venv/bin/python3 -m uv sync --dev
 	# If we are updating tools update aws-cdk too
 	npm install -g aws-cdk
 	@touch $@
