@@ -26,9 +26,9 @@ MAKEFLAGS += --no-builtin-rules
 # https://stackoverflow.com/a/42543006/622276
 GIT_REMOTE_URL:=$(shell git config --get remote.origin.url)
 PROJECT_NAME:=$(shell basename -s .git ${GIT_REMOTE_URL})
-AWS_ACCOUNT_ID:=533267115252
+AWS_ACCOUNT_ID:=123456789012
 AWS_REGION:=ap-southeast-2
-AWS_PROFILE:=$(AWS_ACCOUNT_ID)_V2
+AWS_PROFILE:=$(AWS_ACCOUNT_ID)_JPEAK
 
 .PHONY: clean init plan apply
 
