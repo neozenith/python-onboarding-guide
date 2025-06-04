@@ -1,5 +1,9 @@
 # Containers
 
+<!--TOC-->
+<!--TOC-->
+
+
 ## Docker
 
 ### "Basic" Dockerfile
@@ -85,4 +89,68 @@ CMD ["python_onboarding_guide"]
 # Sadly interpolating variables into CMD is not available as at 2024-09-03
 # https://github.com/moby/moby/issues/34772#issuecomment-2325260813
 # https://docs.docker.com/build/building/variables/
+```
+
+### Docker + ECR Makefile Helpers
+
+```Makefile
+# Ensure the .make folder exists when starting make
+# We need this for build targets that have multiple or no file output.
+# We 'touch' files in here to mark the last time the specific job completed.
+_ := $(shell mkdir -p .make)
+SHELL := bash
+.ONESHELL:
+.SHELLFLAGS := -eu -o pipefail -c
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
+
+# Derive the app name from the git remote repo name and not trust what the local folder name is.
+# https://stackoverflow.com/a/42543006/622276
+GIT_REMOTE_URL=$(shell git config --get remote.origin.url)
+APP_NAME=$(shell basename -s .git ${GIT_REMOTE_URL})
+APP_NAME_KEBAB=$(APP_NAME)
+APP_NAME_SNAKE=$(subst -,_,$(APP_NAME))
+
+AWS_ACCOUNT_ID=
+AWS_PROFILE=
+include .env
+
+AWS_ECR_REGION=ap-southeast-2
+ECR_REGISTRY=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_ECR_REGION).amazonaws.com
+ECR_REPOSITORY=$(ECR_REGISTRY)/$(APP_NAME_KEBAB)
+DOCKER_PYTHON_BASE=3.12-slim
+
+# Named targets are ".PHONY" and get built always. Do not depend on them in the Makefile build chain.
+.PHONY: all init lock prod dev clean directory_setup docker-build docker-run docker-push docker-login debug_env
+
+debug_env:
+	@echo $(DOT_ENV_FILE)
+	@echo $(AWS_PROFILE)
+	@echo $(ECR_REGISTRY)
+
+# ==================== PACKAGING / DEPLOYMENT (CD) ====================
+
+docker-login: 
+	aws --profile $(AWS_PROFILE) ecr get-login-password --region $(AWS_ECR_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_ECR_REGION).amazonaws.com
+
+docker-clean:
+	docker buildx prune -a -f
+	docker image prune -f
+
+docker-build: 
+	docker buildx build \
+		--build-arg TARGET_PYTHON_VERSION=$(DOCKER_PYTHON_BASE) \
+		--build-arg PROJECT_NAME=$(APP_NAME_SNAKE) \
+		--progress plain \
+		-t $(APP_NAME_KEBAB):latest \
+		-t $(ECR_REPOSITORY):latest \
+		-f containers/docker/Dockerfile \
+		.
+	docker tag $(APP_NAME_KEBAB):latest $(ECR_REPOSITORY):latest
+
+docker-run:
+	docker run -i -t --env-file .env $(APP_NAME_KEBAB)
+
+docker-push: docker-build docker-login
+	docker push $(ECR_REPOSITORY):latest
 ```
