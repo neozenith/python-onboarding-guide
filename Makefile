@@ -106,7 +106,7 @@ typecheck: .make/dev-deps-installed
 	.venv/bin/mypy src
 
 docs: .make/dev-deps-installed
-	.venv/bin/md_toc --in-place github --header-levels 4 README.md guides/*.md
+	uvx --from md-toc md_toc --in-place github --header-levels 4 README.md guides/*.md
 
 test: .make/dev-deps-installed
 	.venv/bin/python3 -m pytest

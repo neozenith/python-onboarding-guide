@@ -2,10 +2,12 @@
 
 <!--TOC-->
 
-- [Testcontainers + PyTest](#testcontainers--pytest)
-  - [Pytest Fixtures Using TestContainers](#pytest-fixtures-using-testcontainers)
-    - [`tests/conftest.py`](#testsconftestpy)
-    - [`tests/test_example.py`](#teststest_examplepy)
+- [Pytest](#pytest)
+  - [Conditionally Raising Exceptions](#conditionally-raising-exceptions)
+  - [Testcontainers + PyTest](#testcontainers--pytest)
+    - [Pytest Fixtures Using TestContainers](#pytest-fixtures-using-testcontainers)
+      - [`tests/conftest.py`](#testsconftestpy)
+      - [`tests/test_example.py`](#teststest_examplepy)
 
 <!--TOC-->
 

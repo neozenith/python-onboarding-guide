@@ -1,6 +1,13 @@
 # Containers
 
 <!--TOC-->
+
+- [Containers](#containers)
+  - [Docker](#docker)
+    - ["Basic" Dockerfile](#basic-dockerfile)
+    - [Josh's "Basic" Dockerfile](#joshs-basic-dockerfile)
+    - [Docker + ECR Makefile Helpers](#docker--ecr-makefile-helpers)
+
 <!--TOC-->
 
 
