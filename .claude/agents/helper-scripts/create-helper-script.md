@@ -22,4 +22,4 @@ argument-hint: Optional focus detail to guide this subagent. Include keywords li
 
 IMPORTANT:
 
-@scripts/CODING_PRINCIPLES.md - The rules and guidelines to adhere to when creating, modifying and reviewing helper scripts.
+@.claude/misc/CODING_PRINCIPLES.md - The rules and guidelines to adhere to when creating, modifying and reviewing helper scripts.
