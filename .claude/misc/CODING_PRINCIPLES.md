@@ -158,7 +158,7 @@ import json
 data_path = Path("data/")
 
 nodes = json.loads((data_path / "exercises-catalog.json").read_text(encoding="utf-8"))
-edges = nodes = json.loads((data_path / "exercise-relationships.json").read_text(encoding="utf-8"))
+edges = json.loads((data_path / "exercise-relationships.json").read_text(encoding="utf-8"))
 ```
 
 ### Configuration, Paths and Caching
