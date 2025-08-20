@@ -342,7 +342,7 @@ When needing to iterate on fixing bugs keep in mind these principles:
 
 Always use `pytest` as the test framework.
 
-Each `script/your_script_name.py` sould have it's test file as a sibling file like `script/test_your_script_name.py`.
+Each `script/your_script_name.py` should have it's test file as a sibling file like `script/test_your_script_name.py`.
 
 Minimal example:
 
