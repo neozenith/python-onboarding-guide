@@ -6,6 +6,14 @@
 # ///
 # https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script
 # https://packaging.python.org/en/latest/specifications/inline-script-metadata/#inline-script-metadata
+#
+# Another helpful snippet you are probably looking for if you came to look at this file is this:
+#
+# aws sso login --profile $AWS_PROFILE
+# eval "$(aws configure export-credentials --format env)"
+#
+# It will generate and execute the export statements into the bash shell of the sso token you just acquired.
+#
 # Standard Library
 import configparser
 import hashlib
