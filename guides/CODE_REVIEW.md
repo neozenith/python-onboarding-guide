@@ -5,6 +5,9 @@ There are **\*three types of Code Review** inspired by conference talks by Trish
 - https://www.youtube.com/watch?v=a9_0UUUNt-Y
 - https://www.youtube.com/watch?v=3pth05Rgr8U&t
 
+Another extension to this is "Understanding is the Bottleneck":
+- https://www.youtube.com/watch?v=WkBPX-oDMnA
+
 ## The Three Types
 
 ### Draft / Early Feedback 📝
